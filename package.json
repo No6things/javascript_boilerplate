@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "JavaScript Boilerplate Environment for personal purposes.",
   "scripts": {
+    "prestart": "node buildScripts/startMessage.js",
+    "start": "npm-run-all --parallel security-check open:src",
+    "open:src": "node buildScripts/srcServer.js",
+    "security-check": "nsp check",
+    "localtunnel": "lt --port 3000 --subdomain osoflash",
+    "share": "npm-run-all --parallel open:src localtunnel"
   },
   "author": "Alberto Cavadia",
   "license": "MIT",
@@ -33,7 +39,7 @@
     "localtunnel": "1.8.1",
     "mocha": "3.1.2",
     "nock": "8.1.0",
-    "npm-run-all": "3.1.1",
+    "npm-run-all": "3.1.2",
     "nsp": "2.6.2",
     "numeral": "1.5.3",
     "open": "0.0.5",
