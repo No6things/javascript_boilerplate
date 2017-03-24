@@ -66,7 +66,19 @@ export default {
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loaders: ['babel-loader']},
-      {test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?sourceMap')}
+      {test: /\.scss$/, loaders: ExtractTextPlugin.extract({
+                use: [{
+                    loader: "css-loader",
+                    options: {
+                      sourceMap: true
+                    }
+                }, {
+                    loader: "sass-loader",
+                    options: {
+                      sourceMap: true
+                    }
+                }]}
+                )}
     ]
   }
 };

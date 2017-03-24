@@ -5,6 +5,7 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
+  "plugins": ["angular"],
   "parserOptions": {
     "ecmaVersion": 7,
     "sourceType": "module"
@@ -15,6 +16,12 @@
     "mocha": true
   },
   "rules": {
-    "no-console": 1
+    "no-console": 1,
+    "angular/json-functions": 0
+  },
+  "globals": {
+    "angular": true,
+    "module": true,
+    "inject": true
   }
 }
