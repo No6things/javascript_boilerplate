@@ -19,7 +19,7 @@ export default {
   devtool: "inline-source-map",
   entry: {
     app: path.resolve(__dirname, "src/index"),
-    vendor: ["angular", "angular-smart-table"]
+    vendor: ["angular"]
   },
   target: "web",
   output: {
@@ -28,6 +28,11 @@ export default {
     filename: "[name].js"
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      'angular': 'angular',
+      'smartTable': 'angular-smart-table'
+    }),
+
     new NgAnnotatePlugin({
       add: true
     }),
@@ -45,9 +50,13 @@ export default {
   module: {
     loaders: [
       {
+        test: require.resolve('angular'),
+        loader: 'exports-loader?window.angular'
+      },
+      {
         test: /\.html$/,
         use: [{
-          loader: "raw-loader"
+          loader: "html-loader"
         }]
       },
       {
@@ -55,14 +64,6 @@ export default {
         exclude: ["node_modules"],
         use: [{
           loader: "babel-loader"
-        }]
-      },
-      {
-        test: /\.css$/,
-        use: [{
-          loader: "style-loader"
-        }, {
-          loader: "css-loader"
         }]
       },
       {
@@ -78,6 +79,65 @@ export default {
           loader: "sass-loader",
           options: {
             sourceMap: true
+          }
+        }]
+      },
+      {
+        test: /\.css$/,
+        use: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader"
+        }]
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 25000
+          }
+        }]
+      },
+      {
+        test: /\.woff$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 100000
+          }
+        }]
+      },
+      {
+        test: /\.woff2$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 100000
+          }
+        }]
+      },
+      {
+        test: /\.ttf$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 100000
+          }
+        }]
+      },
+      {
+        test: /\.eot$/,
+        use: [{
+          loader: 'file-loader'
+        }]
+      },
+      {
+        test: /\.svg$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 100000
           }
         }]
       }
