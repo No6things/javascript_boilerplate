@@ -27,7 +27,7 @@
     "angular": "1.6.3",
     "angular-smart-table": "2.1.8",
     "angular-ui-router": "0.4.2",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "3.3.7",
     "whatwg-fetch": "2.0.2"
   },
   "devDependencies": {
@@ -61,12 +61,15 @@
     "nsp": "2.6.2",
     "numeral": "2.0.4",
     "open": "0.0.5",
+    "raw-loader": "0.5.1",
     "rimraf": "2.6.0",
     "sass-loader": "6.0.3",
     "style-loader": "0.13.1",
+    "to-string-loader": "1.1.5",
     "webpack": "2.2.1",
     "webpack-dev-middleware": "1.10.1",
     "webpack-hot-middleware": "2.17.0",
-    "webpack-md5-hash": "0.0.5"
+    "webpack-md5-hash": "0.0.5",
+    "webpack-node-externals": "^1.5.4"
   }
 }

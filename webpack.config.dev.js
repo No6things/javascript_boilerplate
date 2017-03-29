@@ -1,28 +1,31 @@
-import webpack from 'webpack';
-import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import NgAnnotatePlugin from 'ng-annotate-webpack-plugin';
-
-process.traceDeprecation = true;
+import webpack from "webpack";
+import path from "path";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import NgAnnotatePlugin from "ng-annotate-webpack-plugin";
 
 export default {
   resolve: {
-    descriptionFiles: ['package.json'],
-    extensions: ['*', '.js', '.jsx', '.json'],
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    descriptionFiles: ["package.json"],
+    extensions: ["*", ".js", ".jsx", ".json"],
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
     enforceExtension: false,
-    mainFiles: ['main', 'name']
+    mainFiles: ["main", "name"],
+    alias: {
+      Components: path.resolve(__dirname, "src/components/"),
+      Services: path.resolve(__dirname, "src/services/"),
+      Directives: path.resolve(__dirname, "src/directives/")
+    }
   },
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   entry: {
-    app: path.resolve(__dirname, 'src/index'),
-    vendor: ['angular']
+    app: path.resolve(__dirname, "src/index"),
+    vendor: ["angular", "angular-smart-table"]
   },
-  target: 'web',
+  target: "web",
   output: {
-    path: path.resolve(__dirname, 'src'),
-    publicPath: '/',
-    filename: '[name].js'
+    path: path.resolve(__dirname, "src"),
+    publicPath: "/",
+    filename: "[name].js"
   },
   plugins: [
     new NgAnnotatePlugin({
@@ -35,7 +38,7 @@ export default {
     }),
     // Create HTML file that includes reference to bundled JS.
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: "src/index.html",
       inject: true
     })
   ],
@@ -44,34 +47,38 @@ export default {
       {
         test: /\.html$/,
         use: [{
-          loader: 'raw-loader'
+          loader: "raw-loader"
         }]
       },
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: ["node_modules"],
         use: [{
-            loader: 'babel-loader'
+          loader: "babel-loader"
         }]
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [{
+          loader: "style-loader"
+        }, {
+          loader: "css-loader"
+        }]
       },
       {
         test: /\.scss$/,
         use: [{
-            loader: "style-loader"
+          loader: "style-loader"
         }, {
-            loader: "css-loader",
-            options: {
-              sourceMap: true
-            }
+          loader: "css-loader",
+          options: {
+            sourceMap: true
+          }
         }, {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true
-            }
+          loader: "sass-loader",
+          options: {
+            sourceMap: true
+          }
         }]
       }
     ]

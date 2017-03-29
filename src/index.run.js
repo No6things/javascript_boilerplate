@@ -1,3 +1,4 @@
-export default function runBlock(){
-  console.log('running');
+//  @ngInject
+export default function runBlock($log){
+  $log.info('running');
 }

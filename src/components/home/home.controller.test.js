@@ -1,4 +1,5 @@
-import home from './index';
+import {expect} from 'chai';
+import home from './index.js';
 
 describe('Controller: Home', function() {
   let $controller;
@@ -9,8 +10,8 @@ describe('Controller: Home', function() {
     $controller = _$controller_;
   }));
 
-  it('name is initialized to World', function() {
+  it('name is initialized to Users', function() {
     let ctrl = $controller('HomeController');
-    expect(ctrl.name).toBe('World');
+    expect(ctrl.name).toBe('Users');
   });
 });

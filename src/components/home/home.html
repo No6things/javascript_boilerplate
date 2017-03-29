@@ -1,26 +1,30 @@
-<div id="home-header" class="jumbotron">
-  <greeting name="home.name"></greeting>
-</div>
-<h1>Users</h1>
-<table st-table="home.rowCollection" class="table table-striped">
-	<thead>
-	<tr>
-    <th>id</th>
-		<th>first name</th>
-		<th>last name</th>
-		<th>email</th>
-	</tr>
-	</thead>
-	<tbody>
-	<tr ng-repeat="row in home.rowCollection" ng-if="home.visibility">
-    <td><a ng-click="home.deleteUser(row.id)" class="deleteUser">Delete</a></td>
-    <td>{{row.id}}</td>
-		<td>{{row.firstName}}</td>
-		<td>{{row.lastName}}</td>
-		<td>{{row.email}}</td>
-	</tr>
-	</tbody>
-</table>
+<div ng-controller="HomeController as home">
+  <div id="home-header" class="jumbotron">
+    <greeting section="home.name"></greeting>
+  </div>
+  <table class="table table-striped"
+         st-pipe="home.loadUsers"
+         st-displayed="home.rowDisplayed"
+         st-table="home.rowCollection">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>first name</th>
+      <th>last name</th>
+      <th>email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-ng-repeat-start="row in home.rowDisplayed">
+      <td>{{row.id}}</td>
+      <td>{{row.firstName}}</td>
+      <td>{{row.lastName}}</td>
+      <td>{{row.email}}</td>
+    </tr>
+    <tr data-ng-repeat-end=""></tr>
+    </tbody>
+  </table>
 
-<button class="btn btn-primary" ng-click="home.changeName()">Change</button>
-<button class="btn btn-danger" ng-click="home.randomName()">Random</button>
+  <button class="btn btn-primary" ng-click="home.changeName()">Update</button>
+
+</div>

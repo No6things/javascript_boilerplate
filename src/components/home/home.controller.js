@@ -1,26 +1,36 @@
 import {getUsers, deleteUser} from '../../api/userApi'
+
 export default class HomeController {
-  constructor(randomNames) {
-    this.random = randomNames;
-    this.name = 'World';
+  constructor($log) {
+    var tableState = {};
+    this.name = 'Users';
     this.visibility = true;
-    getUsers().then(result => {
-      this.rowCollection = result;
-    });
+    this.rowCollection = [];
+    this.rowDisplayed = [];
+    this.loadUsers(tableState);
+    this.$log= $log;
+    this.$log.info('loading from constructor')
   }
+
+  loadUsers(tableState) {
+     getUsers(tableState).then(result => {
+      this.rowDisplayed = result;
+    });
+    console.info('users', this.rowDisplayed);
+  }
+
+    onClick() {
+      this.loadUsers({});
+    }
+
 
   changeName() {
-    this.name = 'angular-tips';
-  }
-
-  randomName() {
-    this.name = this.random.getName();
+    this.name = 'EQ Bank';
   }
 
   deleteUser(userId) {
     deleteUser(userId);
-    this.visibility = false;
   }
 }
 
-HomeController.$inject = ['randomNames'];
+HomeController.$inject = ['$log'];

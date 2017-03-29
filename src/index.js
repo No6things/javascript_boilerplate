@@ -5,7 +5,7 @@ import uirouter from 'angular-ui-router';
 
 import routerConfig from './index.route.js';
 import runBlock from './index.run.js';
-import home from './components/home/index.js'
+import home from 'Components/home/index'
 
 'use strict';
 
