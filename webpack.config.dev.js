@@ -30,7 +30,7 @@ export default {
   plugins: [
     new webpack.ProvidePlugin({
       'angular': 'angular',
-      'smartTable': 'angular-smart-table'
+      'window.jQuery': 'jquery'
     }),
 
     new NgAnnotatePlugin({

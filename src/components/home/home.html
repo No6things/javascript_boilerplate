@@ -2,40 +2,48 @@
   <div id="home-header" class="jumbotron">
     <greeting section="home.name"></greeting>
   </div>
-   <div class="uiboostrap">
-     <pre>Selected date is: <em>{{home.dt | date:'fullDate' }}</em></pre>
-    <div uib-datepicker ng-model="home.dt" class="well well-sm" datepicker-options="home.options"></div>
-    <hr />
-    <button type="button" class="btn btn-sm btn-info" ng-click="today()">Today</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="setDate(2009, 7, 24)">2009-08-24</button>
-    <button type="button" class="btn btn-sm btn-danger" ng-click="clear()">Clear</button>
-    <button type="button" class="btn btn-sm btn-default" ng-click="toggleMin()" uib-tooltip="After today restriction">Min date</button>
-   </div>
 
-   <div class="smart-table">
-    <table class="table table-striped"
-         st-pipe="home.loadUsers"
-         st-displayed="home.rowDisplayed"
-         st-table="home.rowCollection">
-      <thead>
-      <tr>
-        <th>id</th>
-        <th>first name</th>
-        <th>last name</th>
-        <th>email</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr data-ng-repeat-start="row in home.rowDisplayed">
-        <td>{{row.id}}</td>
-        <td>{{row.firstName}}</td>
-        <td>{{row.lastName}}</td>
-        <td>{{row.email}}</td>
-      </tr>
-      <tr data-ng-repeat-end=""></tr>
-      </tbody>
-    </table>
-    <button class="btn btn-default" ng-click="home.changeName()">Update</button>
-   </div>
-
+    <div class="container">
+        <div class="row">
+            <div class="section col s4">
+              <div input-field>
+                <input type="text" ng-model="dummyInputs.inputFieldInput" length="150">
+                <label>Input label</label>
+              </div>
+              <div input-field>
+                  <select ng-model="home.select.value" material-select>
+                      <option ng-repeat="value in home.select.choices">{{value}}</option>
+                  </select>
+              </div>
+              <div class="section col s8">
+                  <h5>You selected: <b>{{home.select.value}}</b></h5>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="smart-table">
+      <table class="table table-striped"
+          st-pipe="home.loadUsers"
+          st-displayed="home.rowDisplayed"
+          st-table="home.rowCollection">
+        <thead>
+        <tr>
+          <th>id</th>
+          <th>first name</th>
+          <th>last name</th>
+          <th>email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat-start="row in home.rowDisplayed">
+          <td>{{row.id}}</td>
+          <td>{{row.firstName}}</td>
+          <td>{{row.lastName}}</td>
+          <td>{{row.email}}</td>
+        </tr>
+        <tr data-ng-repeat-end=""></tr>
+        </tbody>
+      </table>
+      <button class="btn btn-default" ng-click="home.changeName()">Update</button>
+    </div>
 </div>
