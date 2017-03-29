@@ -3,24 +3,26 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import NgAnnotatePlugin from 'ng-annotate-webpack-plugin';
 
+process.traceDeprecation = true;
+
 export default {
   resolve: {
-    descriptionFiles: ['bower.json', 'package.json'],
+    descriptionFiles: ['package.json'],
     extensions: ['*', '.js', '.jsx', '.json'],
-    modules: [path.resolve(__dirname, 'src'), 'bower_components', 'node_modules'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     enforceExtension: false,
     mainFiles: ['main', 'name']
-
   },
   devtool: 'inline-source-map',
-  entry: [
-    path.resolve(__dirname, 'src/index')
-  ],
+  entry: {
+    app: path.resolve(__dirname, 'src/index'),
+    vendor: ['angular']
+  },
   target: 'web',
   output: {
     path: path.resolve(__dirname, 'src'),
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   plugins: [
     new NgAnnotatePlugin({
@@ -39,10 +41,22 @@ export default {
   ],
   module: {
     loaders: [
-      {   
+      {
+        test: /\.html$/,
+        use: [{
+          loader: 'raw-loader'
+        }]
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: ['babel-loader']
+        use: [{
+            loader: 'babel-loader'
+        }]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.scss$/,

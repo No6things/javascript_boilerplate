@@ -13,6 +13,5 @@
  */
 
 /* eslint-disable no-unused-vars */
-import ngRoute from '../bower_components/angular-ui-router/release/angular-ui-router';
-import ngMessages from '../bower_components/angular-messages/angular-messages';
+
 import fetch from 'whatwg-fetch';
